@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
@@ -13,11 +12,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler
-  public final ResponseEntity<Object> handleProjectIdException(
-      ProjectIdException exception, WebRequest request) {
-
+  public final ResponseEntity<Object> handleProjectIdException(ProjectIdException exception) {
     ProjectIdExceptionsResponse response = new ProjectIdExceptionsResponse(exception.getMessage());
     return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
   }
-
 }
