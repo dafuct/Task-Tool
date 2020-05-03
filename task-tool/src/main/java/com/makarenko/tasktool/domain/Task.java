@@ -13,17 +13,17 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Project {
+public class Task {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @NotBlank(message = "Project name is required")
-  private String projectName;
+  private String taskName;
   @NotBlank(message = "Project Identifier is required")
   @Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
   @Column(updatable = false, unique = true)
-  private String projectIdentifier;
+  private String taskIdentifier;
   @NotBlank(message = "Project description is required")
   private String description;
   @JsonFormat(pattern = "yyyy-mm-dd")
@@ -35,7 +35,7 @@ public class Project {
   @JsonFormat(pattern = "yyyy-mm-dd")
   private Date updated_At;
 
-  public Project() {
+  public Task() {
   }
 
   public Long getId() {
@@ -46,20 +46,20 @@ public class Project {
     this.id = id;
   }
 
-  public String getProjectName() {
-    return projectName;
+  public String getTaskName() {
+    return taskName;
   }
 
-  public void setProjectName(String projectName) {
-    this.projectName = projectName;
+  public void setTaskName(String projectName) {
+    this.taskName = projectName;
   }
 
-  public String getProjectIdentifier() {
-    return projectIdentifier;
+  public String getTaskIdentifier() {
+    return taskIdentifier;
   }
 
-  public void setProjectIdentifier(String projectIdentifier) {
-    this.projectIdentifier = projectIdentifier;
+  public void setTaskIdentifier(String projectIdentifier) {
+    this.taskIdentifier = projectIdentifier;
   }
 
   public String getDescription() {

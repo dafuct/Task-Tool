@@ -1,10 +1,10 @@
 package com.makarenko.tasktool.exceptions;
 
-public class ProjectIdExceptionsResponse {
+public class TaskIdExceptionsResponse {
 
   private String projectIdentifier;
 
-  public ProjectIdExceptionsResponse(String projectIdentifier) {
+  public TaskIdExceptionsResponse(String projectIdentifier) {
     this.projectIdentifier = projectIdentifier;
   }
 
