@@ -5,9 +5,11 @@
 /.pnp
 .pnp.js
 .gitignore
+README.md
 
 # testing
 /coverage
+
 
 # production
 /build
