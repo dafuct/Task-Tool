@@ -29,14 +29,11 @@ public class TaskController {
   }
 
   @PostMapping("")
-  public ResponseEntity<?> createNewTask(@Valid @RequestBody Task task,
-      BindingResult result) {
-
+  public ResponseEntity<?> createNewTask(@Valid @RequestBody Task task, BindingResult result) {
     ResponseEntity<?> error = validationErrorService.mapValidationService(result);
     if (error != null) {
       return error;
     }
-
     return new ResponseEntity<>(service.saveOrUpdateTask(task), HttpStatus.CREATED);
   }
 
