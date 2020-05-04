@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createTask } from "../../actions/taskActions";
 
 class AddTask extends Component {
   constructor() {
@@ -29,7 +32,7 @@ class AddTask extends Component {
       end_date: this.state.end_date,
     };
 
-    console.log(newTask);
+    this.props.createTask(newTask, this.props.history);
   }
 
   render() {
@@ -104,4 +107,8 @@ class AddTask extends Component {
   }
 }
 
-export default AddTask;
+AddTask.propTypes = {
+  createTask: PropTypes.func.isRequired,
+};
+
+export default connect(null, { createTask })(AddTask);
