@@ -18,13 +18,13 @@ public class Task {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @NotBlank(message = "Project name is required")
+  @NotBlank(message = "Task name is required")
   private String taskName;
-  @NotBlank(message = "Project Identifier is required")
+  @NotBlank(message = "Task Identifier is required")
   @Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
   @Column(updatable = false, unique = true)
   private String taskIdentifier;
-  @NotBlank(message = "Project description is required")
+  @NotBlank(message = "Task description is required")
   private String description;
   @JsonFormat(pattern = "yyyy-mm-dd")
   private Date start_date;
@@ -50,16 +50,16 @@ public class Task {
     return taskName;
   }
 
-  public void setTaskName(String projectName) {
-    this.taskName = projectName;
+  public void setTaskName(String taskName) {
+    this.taskName = taskName;
   }
 
   public String getTaskIdentifier() {
     return taskIdentifier;
   }
 
-  public void setTaskIdentifier(String projectIdentifier) {
-    this.taskIdentifier = projectIdentifier;
+  public void setTaskIdentifier(String taskIdentifier) {
+    this.taskIdentifier = taskIdentifier;
   }
 
   public String getDescription() {

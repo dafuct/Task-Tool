@@ -2,17 +2,17 @@ package com.makarenko.tasktool.exceptions;
 
 public class TaskIdExceptionsResponse {
 
-  private String projectIdentifier;
+  private String taskIdentifier;
 
-  public TaskIdExceptionsResponse(String projectIdentifier) {
-    this.projectIdentifier = projectIdentifier;
+  public TaskIdExceptionsResponse(String taskIdentifier) {
+    this.taskIdentifier = taskIdentifier;
   }
 
-  public String getProjectIdentifier() {
-    return projectIdentifier;
+  public String getTaskIdentifier() {
+    return taskIdentifier;
   }
 
-  public void setProjectIdentifier(String projectIdentifier) {
-    this.projectIdentifier = projectIdentifier;
+  public void setTaskIdentifier(String taskIdentifier) {
+    this.taskIdentifier = taskIdentifier;
   }
 }
