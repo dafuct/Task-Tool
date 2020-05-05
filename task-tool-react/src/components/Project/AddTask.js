@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createTask } from "../../actions/taskActions";
+import classnames from "classnames";
 
 class AddTask extends Component {
   constructor() {
@@ -57,34 +58,50 @@ class AddTask extends Component {
                   <div className="form-group">
                     <input
                       type="text"
-                      className="form-control form-control-lg "
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.taskName,
+                      })}
                       placeholder="Task Name"
                       name="taskName"
                       value={this.state.taskName}
                       onChange={this.onChange}
                     />
-                    <p>{errors.taskName}</p>
+                    {errors.taskName && (
+                      <div className="invalid-feedback">{errors.taskName}</div>
+                    )}
                   </div>
                   <div className="form-group">
                     <input
                       type="text"
-                      className="form-control form-control-lg"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.taskIdentifier,
+                      })}
                       placeholder="Unique Task ID"
                       name="taskIdentifier"
                       value={this.state.taskIdentifier}
                       onChange={this.onChange}
                     />
-                    <p>{errors.taskIdentifier}</p>
+                    {errors.taskName && (
+                      <div className="invalid-feedback">
+                        {errors.taskIdentifier}
+                      </div>
+                    )}
                   </div>
                   <div className="form-group">
                     <textarea
-                      className="form-control form-control-lg"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.description,
+                      })}
                       placeholder="Task Description"
                       name="description"
                       value={this.state.description}
                       onChange={this.onChange}
                     />
-                    <p>{errors.description}</p>
+                    {errors.taskName && (
+                      <div className="invalid-feedback">
+                        {errors.description}
+                      </div>
+                    )}
                   </div>
                   <h6>Start Date</h6>
                   <div className="form-group">
