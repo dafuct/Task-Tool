@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import ProjectItem from "./Project/ProjectItem";
 import CreateTaskButton from "./Project/CreateTaskButton";
+import { connect } from "react-redux";
+import { getTask } from "../actions/taskActions";
+import PropTypes from "prop-types";
 
 class Dashboard extends Component {
+  componentDidMount() {
+    this.props.getTask();
+  }
+
   render() {
     return (
       <div className="projects">
@@ -23,4 +30,13 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+  project: PropTypes.object.isRequired,
+  getTask: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  task: state.task,
+});
+
+export default connect(mapStateToProps, { getTask })(Dashboard);
