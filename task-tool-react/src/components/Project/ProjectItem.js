@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteTask } from "../../actions/taskActions";
 
 class ProjectItem extends Component {
+  onDeleteClick = (id) => {
+    this.props.deleteTask(id);
+  };
+
   render() {
     const { task } = this.props;
     return (
@@ -27,11 +34,12 @@ class ProjectItem extends Component {
                     <i className="fa fa-edit pr-1"> Update Task Info</i>
                   </li>
                 </Link>
-                <a href="">
-                  <li className="list-group-item delete">
-                    <i className="fa fa-minus-circle pr-1"> Delete Task</i>
-                  </li>
-                </a>
+                <li
+                  className="list-group-item delete"
+                  onClick={this.onDeleteClick.bind(this, task.taskIdentifier)}
+                >
+                  <i className="fa fa-minus-circle pr-1"> Delete Task</i>
+                </li>
               </ul>
             </div>
           </div>
@@ -41,4 +49,13 @@ class ProjectItem extends Component {
   }
 }
 
-export default ProjectItem;
+// const mapStateToProps = (state) => ({
+//   task: state.task.task,
+//   errors: state.errors,
+// });
+
+ProjectItem.propTypes = {
+  deleteTask: PropTypes.func.isRequired,
+};
+
+export default connect(null, { deleteTask })(ProjectItem);

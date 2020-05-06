@@ -81,7 +81,7 @@ class AddTask extends Component {
                       value={this.state.taskIdentifier}
                       onChange={this.onChange}
                     />
-                    {errors.taskName && (
+                    {errors.taskIdentifier && (
                       <div className="invalid-feedback">
                         {errors.taskIdentifier}
                       </div>
@@ -97,7 +97,7 @@ class AddTask extends Component {
                       value={this.state.description}
                       onChange={this.onChange}
                     />
-                    {errors.taskName && (
+                    {errors.description && (
                       <div className="invalid-feedback">
                         {errors.description}
                       </div>
