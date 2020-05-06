@@ -22,9 +22,13 @@ export const getTasks = () => async (dispatch) => {
 };
 
 export const getTask = (id, history) => async (dispatch) => {
-  const res = await axios.get(`http://localhost:8080/api/task/${id}`);
-  dispatch({
-    type: GET_TASK,
-    payload: res.data,
-  });
+  try {
+    const res = await axios.get(`http://localhost:8080/api/task/${id}`);
+    dispatch({
+      type: GET_TASK,
+      payload: res.data,
+    });
+  } catch (error) {
+    history.push("/dashboard");
+  }
 };

@@ -14,12 +14,16 @@ class UpdateTask extends Component {
       description: "",
       start_date: "",
       end_date: "",
+      errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
     const {
       id,
       taskName,
@@ -64,6 +68,7 @@ class UpdateTask extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div className="project">
         <div className="container">
@@ -75,12 +80,17 @@ class UpdateTask extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg "
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.taskName,
+                    })}
                     placeholder="Task Name"
                     name="taskName"
                     value={this.state.taskName}
                     onChange={this.onChange}
                   />
+                  {errors.taskName && (
+                    <div className="invalid-feedback">{errors.taskName}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
@@ -95,12 +105,17 @@ class UpdateTask extends Component {
                 </div>
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.description,
+                    })}
                     placeholder="Task Description"
                     name="description"
                     onChange={this.onChange}
                     value={this.state.description}
                   />
+                  {errors.description && (
+                    <div className="invalid-feedback">{errors.description}</div>
+                  )}
                 </div>
                 <h6>Start Date</h6>
                 <div className="form-group">
@@ -140,10 +155,12 @@ UpdateTask.propTypes = {
   getTask: PropTypes.func.isRequired,
   createTask: PropTypes.func.isRequired,
   task: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   task: state.task.task,
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { getTask, createTask })(UpdateTask);
