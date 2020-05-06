@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import ProjectItem from "./Project/ProjectItem";
 import CreateTaskButton from "./Project/CreateTaskButton";
 import { connect } from "react-redux";
-import { getTask } from "../actions/taskActions";
+import { getTasks } from "../actions/taskActions";
 import PropTypes from "prop-types";
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.getTask();
+    this.props.getTasks();
   }
 
   render() {
@@ -36,11 +36,11 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   project: PropTypes.object.isRequired,
-  getTask: PropTypes.func.isRequired,
+  getTasks: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   task: state.task,
 });
 
-export default connect(mapStateToProps, { getTask })(Dashboard);
+export default connect(mapStateToProps, { getTasks })(Dashboard);
