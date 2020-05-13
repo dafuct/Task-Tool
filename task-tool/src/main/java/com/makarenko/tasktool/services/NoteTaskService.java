@@ -4,6 +4,7 @@ import com.makarenko.tasktool.domain.Backlog;
 import com.makarenko.tasktool.domain.NoteTask;
 import com.makarenko.tasktool.repositories.BacklogRepository;
 import com.makarenko.tasktool.repositories.NoteTaskRepository;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,5 +38,9 @@ public class NoteTaskService {
     }
 
     return noteTaskRepository.save(noteTask);
+  }
+
+  public Iterable<NoteTask> findBacklogById(String id) {
+    return noteTaskRepository.findByTaskIdentifierOrderByPriority(id);
   }
 }

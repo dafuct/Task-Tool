@@ -3,11 +3,13 @@ package com.makarenko.tasktool.web;
 import com.makarenko.tasktool.domain.NoteTask;
 import com.makarenko.tasktool.services.MapValidationErrorService;
 import com.makarenko.tasktool.services.NoteTaskService;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,4 +43,8 @@ public class BacklogController {
         HttpStatus.CREATED);
   }
 
+  @GetMapping("/{backlog_id}")
+  public Iterable<NoteTask> getTaskBacklog(@PathVariable String backlog_id) {
+    return noteTaskService.findBacklogById(backlog_id);
+  }
 }

@@ -1,6 +1,7 @@
 package com.makarenko.tasktool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,6 +41,7 @@ public class Task {
   private Date updated_At;
 
   @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "task")
+  @JsonIgnore
   private Backlog backlog;
 
   public Task() {
