@@ -24,15 +24,16 @@ public class NoteTaskService {
     noteTask.setBacklog(backlog);
     Integer ntSequence = backlog.getNTSequence();
     ntSequence++;
+    backlog.setNTSequence(ntSequence);
     noteTask.setTaskSequence(taskIdentifier + "-" + ntSequence);
     noteTask.setTaskIdentifier(taskIdentifier);
 
-//    if (noteTask.getPriority() == 0 || noteTask.getPriority() == null) {
-//      noteTask.setPriority(3);
-//    }
-
     if (noteTask.getStatus() == "" || noteTask.getStatus() == null) {
       noteTask.setStatus("TODO");
+    }
+
+    if (noteTask.getPriority() == null) {
+      noteTask.setPriority(3);
     }
 
     return noteTaskRepository.save(noteTask);
