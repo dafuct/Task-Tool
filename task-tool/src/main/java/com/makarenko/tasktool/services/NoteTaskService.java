@@ -1,23 +1,40 @@
 package com.makarenko.tasktool.services;
 
+import com.makarenko.tasktool.domain.Backlog;
 import com.makarenko.tasktool.domain.NoteTask;
 import com.makarenko.tasktool.repositories.BacklogRepository;
-import com.makarenko.tasktool.repositories.TaskRepository;
+import com.makarenko.tasktool.repositories.NoteTaskRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class NoteTaskService {
 
-  private BacklogRepository backlogRepository;
-  private TaskRepository taskRepository;
+  private final BacklogRepository backlogRepository;
+  private final NoteTaskRepository noteTaskRepository;
 
   public NoteTaskService(BacklogRepository backlogRepository,
-      TaskRepository taskRepository) {
+      NoteTaskRepository noteTaskRepository) {
     this.backlogRepository = backlogRepository;
-    this.taskRepository = taskRepository;
+    this.noteTaskRepository = noteTaskRepository;
   }
 
-//  public NoteTask addNoteTask() {
-//
-//  }
+  public NoteTask addNoteTask(String taskIdentifier, NoteTask noteTask) {
+    Backlog backlog = backlogRepository.findByTaskIdentifier(taskIdentifier);
+
+    noteTask.setBacklog(backlog);
+    Integer ntSequence = backlog.getNTSequence();
+    ntSequence++;
+    noteTask.setTaskSequence(taskIdentifier + "-" + ntSequence);
+    noteTask.setTaskIdentifier(taskIdentifier);
+
+//    if (noteTask.getPriority() == 0 || noteTask.getPriority() == null) {
+//      noteTask.setPriority(3);
+//    }
+
+    if (noteTask.getStatus() == "" || noteTask.getStatus() == null) {
+      noteTask.setStatus("TODO");
+    }
+
+    return noteTaskRepository.save(noteTask);
+  }
 }
