@@ -7,6 +7,7 @@ import com.makarenko.tasktool.exceptions.TaskNotFoundException;
 import com.makarenko.tasktool.repositories.BacklogRepository;
 import com.makarenko.tasktool.repositories.NoteTaskRepository;
 import com.makarenko.tasktool.repositories.TaskRepository;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -78,8 +79,15 @@ public class NoteTaskService {
   }
 
   public NoteTask updateByTaskSequence(NoteTask updateNote, String backlog_id, String nt_id) {
-    NoteTask noteTask = noteTaskRepository.findByTaskSequence(nt_id);
-    noteTask = updateNote;
+    NoteTask noteTask = findNTByTaskSequence(backlog_id, nt_id);
+    if (noteTask != updateNote) {
+      noteTask = updateNote;
+    }
     return noteTaskRepository.save(noteTask);
+  }
+
+  public void deleteNTByTaskSequence(String backlog_id, String nt_id) {
+    NoteTask note = findNTByTaskSequence(backlog_id, nt_id);
+    noteTaskRepository.delete(note);
   }
 }

@@ -27,7 +27,8 @@ public class Backlog {
   @JsonIgnore
   private Task task;
 
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "backlog")
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH,
+      mappedBy = "backlog", orphanRemoval = true)
   private List<NoteTask> noteTasks = new ArrayList<>();
 
   public Backlog() {

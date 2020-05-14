@@ -3,12 +3,12 @@ package com.makarenko.tasktool.web;
 import com.makarenko.tasktool.domain.NoteTask;
 import com.makarenko.tasktool.services.MapValidationErrorService;
 import com.makarenko.tasktool.services.NoteTaskService;
-import java.util.List;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,7 +65,15 @@ public class BacklogController {
       return errorMap;
     }
 
-    NoteTask note = noteTaskService.updateByTaskSequence(noteTask, backlog_id, nt_id);
-    return new ResponseEntity<>(note, HttpStatus.OK);
+    NoteTask updateNote = noteTaskService.updateByTaskSequence(noteTask, backlog_id, nt_id);
+    return new ResponseEntity<>(updateNote, HttpStatus.OK);
+  }
+
+  @DeleteMapping("/{backlog_id}/{nt_id}")
+  public ResponseEntity<?> deleteNoteTask(@PathVariable String backlog_id,
+      @PathVariable String nt_id) {
+    noteTaskService.deleteNTByTaskSequence(backlog_id, nt_id);
+    return new ResponseEntity<>("Note task " + nt_id
+        + " was deleted successfully", HttpStatus.OK);
   }
 }
