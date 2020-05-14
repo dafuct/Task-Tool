@@ -16,4 +16,10 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     TaskIdExceptionsResponse response = new TaskIdExceptionsResponse(exception.getMessage());
     return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
   }
+
+  @ExceptionHandler
+  public final ResponseEntity<Object> handleTaskNotFoundException(TaskNotFoundException exception) {
+    TaskNotFoundExceptionResponse response = new TaskNotFoundExceptionResponse(exception.getMessage());
+    return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+  }
 }
