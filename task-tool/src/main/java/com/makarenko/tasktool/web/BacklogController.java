@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,5 +54,18 @@ public class BacklogController {
       @PathVariable String nt_id) {
     NoteTask noteTask = noteTaskService.findNTByTaskSequence(backlog_id, nt_id);
     return new ResponseEntity<>(noteTask, HttpStatus.OK);
+  }
+
+  @PatchMapping("/{backlog_id}/{nt_id}")
+  public ResponseEntity<?> updateNoteTask(@Valid @RequestBody NoteTask noteTask,
+      BindingResult result, @PathVariable String backlog_id, @PathVariable String nt_id) {
+
+    ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
+    if (errorMap != null) {
+      return errorMap;
+    }
+
+    NoteTask note = noteTaskService.updateByTaskSequence(noteTask, backlog_id, nt_id);
+    return new ResponseEntity<>(note, HttpStatus.OK);
   }
 }

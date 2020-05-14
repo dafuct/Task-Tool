@@ -76,4 +76,10 @@ public class NoteTaskService {
     }
     return noteTask;
   }
+
+  public NoteTask updateByTaskSequence(NoteTask updateNote, String backlog_id, String nt_id) {
+    NoteTask noteTask = noteTaskRepository.findByTaskSequence(nt_id);
+    noteTask = updateNote;
+    return noteTaskRepository.save(noteTask);
+  }
 }
