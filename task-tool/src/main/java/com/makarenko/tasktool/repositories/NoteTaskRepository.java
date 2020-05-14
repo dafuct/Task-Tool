@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface NoteTaskRepository extends CrudRepository<NoteTask, Long> {
 
   List<NoteTask> findByTaskIdentifierOrderByPriority(String id);
+
+  NoteTask findByTaskSequence(String sequence);
 }

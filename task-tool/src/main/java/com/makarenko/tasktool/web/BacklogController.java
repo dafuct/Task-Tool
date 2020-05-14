@@ -47,4 +47,11 @@ public class BacklogController {
   public Iterable<NoteTask> getTaskBacklog(@PathVariable String backlog_id) {
     return noteTaskService.findBacklogById(backlog_id);
   }
+
+  @GetMapping("/{backlog_id}/{nt_id}")
+  public ResponseEntity<?> getNoteTask(@PathVariable String backlog_id,
+      @PathVariable String nt_id) {
+    NoteTask noteTask = noteTaskService.findNTByTaskSequence(backlog_id, nt_id);
+    return new ResponseEntity<>(noteTask, HttpStatus.OK);
+  }
 }

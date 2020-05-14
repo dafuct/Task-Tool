@@ -58,4 +58,8 @@ public class NoteTaskService {
 
     return noteTaskRepository.findByTaskIdentifierOrderByPriority(id);
   }
+
+  public NoteTask findNTByTaskSequence(String backlog_id, String nt_id) {
+    return noteTaskRepository.findByTaskSequence(nt_id);
+  }
 }
