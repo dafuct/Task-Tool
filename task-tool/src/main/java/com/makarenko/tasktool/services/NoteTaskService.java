@@ -60,6 +60,20 @@ public class NoteTaskService {
   }
 
   public NoteTask findNTByTaskSequence(String backlog_id, String nt_id) {
-    return noteTaskRepository.findByTaskSequence(nt_id);
+    Backlog backlog = backlogRepository.findByTaskIdentifier(backlog_id);
+    if (backlog == null) {
+      throw new TaskNotFoundException("Task with ID: '" + backlog_id + "' does not exist");
+    }
+
+    NoteTask noteTask = noteTaskRepository.findByTaskSequence(nt_id);
+    if (noteTask == null) {
+      throw new TaskNotFoundException("Note: '" + nt_id + "' not found");
+    }
+
+    if (!noteTask.getTaskIdentifier().equals(backlog_id)) {
+      throw new TaskNotFoundException("Note: '" + nt_id + "' does not exist in this task: '"
+          + backlog_id + "'");
+    }
+    return noteTask;
   }
 }
