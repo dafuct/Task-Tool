@@ -23,6 +23,12 @@ class AddNoteTask extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -46,6 +52,7 @@ class AddNoteTask extends Component {
 
   render() {
     const { id } = this.props.match.params;
+    const { errors } = this.state;
     return (
       <div className="add-PBI">
         <div className="container">
@@ -60,12 +67,17 @@ class AddNoteTask extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.summary,
+                    })}
                     name="summary"
                     placeholder="Note Task summary"
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
+                  {errors.summary && (
+                    <div className="invalid-feedback">{errors.summary}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
@@ -129,6 +141,11 @@ class AddNoteTask extends Component {
 
 AddNoteTask.propTypes = {
   addNoteTask: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-export default connect(null, { addNoteTask })(AddNoteTask);
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { addNoteTask })(AddNoteTask);
