@@ -3,7 +3,7 @@ import { GET_ERRORS, GET_TASKS, GET_TASK, DELETE_TASK } from "./types";
 
 export const createTask = (task, history) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/task", task);
+    await axios.post("/api/task", task);
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,

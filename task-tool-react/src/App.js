@@ -8,6 +8,8 @@ import AddTask from "./components/Project/AddTask";
 import { Provider } from "react-redux";
 import store from "./store";
 import UpdateTask from "./components/Project/UpdateTask";
+import TaskBoard from "./components/TaskBoard/TaskBoard";
+import AddNoteTask from "./components/TaskBoard/AddNoteTask";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/addTask" component={AddTask} />
           <Route exact path="/updateTask/:id" component={UpdateTask} />
+          <Route exact path="/taskBoard/:id" component={TaskBoard} />
+          <Route exact path="/addNoteTask/:id" component={AddNoteTask} />
         </div>
       </Router>
     </Provider>
