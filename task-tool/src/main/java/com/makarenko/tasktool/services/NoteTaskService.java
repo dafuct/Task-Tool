@@ -40,7 +40,7 @@ public class NoteTaskService {
         noteTask.setStatus("TODO");
       }
 
-      if (noteTask.getPriority() == null) {
+      if (noteTask.getPriority() == 0 || noteTask.getPriority() == null) {
         noteTask.setPriority(3);
       }
 

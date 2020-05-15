@@ -1,7 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { addNoteTask } from "../../actions/backlogActions";
+import PropTypes from "prop-types";
 
 class AddNoteTask extends Component {
+  constructor(props) {
+    super(props);
+    const { id } = this.props.match.params;
+
+    this.state = {
+      summary: "",
+      acceptanceCriteria: "",
+      status: "",
+      priority: 0,
+      dueDate: "",
+      taskIdentifier: id,
+      errors: {},
+    };
+  }
+
   render() {
     const { id } = this.props.match.params;
     return (
@@ -21,6 +40,7 @@ class AddNoteTask extends Component {
                     className="form-control form-control-lg"
                     name="summary"
                     placeholder="Note Task summary"
+                    value={this.state.summary}
                   />
                 </div>
                 <div className="form-group">
@@ -28,6 +48,7 @@ class AddNoteTask extends Component {
                     className="form-control form-control-lg"
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
+                    value={this.state.acceptanceCriteria}
                   />
                 </div>
                 <h6>Due Date</h6>
@@ -36,12 +57,14 @@ class AddNoteTask extends Component {
                     type="date"
                     className="form-control form-control-lg"
                     name="dueDate"
+                    value={this.state.dueDate}
                   />
                 </div>
                 <div className="form-group">
                   <select
                     className="form-control form-control-lg"
                     name="priority"
+                    value={this.state.priority}
                   >
                     <option value={0}>Select Priority</option>
                     <option value={1}>High</option>
@@ -54,6 +77,7 @@ class AddNoteTask extends Component {
                   <select
                     className="form-control form-control-lg"
                     name="status"
+                    value={this.state.status}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
@@ -75,4 +99,8 @@ class AddNoteTask extends Component {
   }
 }
 
-export default AddNoteTask;
+AddNoteTask.propTypes = {
+  addNoteTask: PropTypes.func.isRequired,
+};
+
+export default connect(null, { addNoteTask })(AddNoteTask);
