@@ -19,6 +19,29 @@ class AddNoteTask extends Component {
       taskIdentifier: id,
       errors: {},
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const newTask = {
+      summary: this.state.summary,
+      acceptanceCriteria: this.state.acceptanceCriteria,
+      status: this.state.status,
+      priority: this.state.priority,
+      dueDate: this.state.dueDate,
+    };
+    this.props.addNoteTask(
+      this.state.taskIdentifier,
+      newTask,
+      this.props.history
+    );
   }
 
   render() {
@@ -33,7 +56,7 @@ class AddNoteTask extends Component {
               </Link>
               <h4 className="display-4 text-center">Add Note</h4>
               <p className="lead text-center">Task Name + Task Code</p>
-              <form>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -41,6 +64,7 @@ class AddNoteTask extends Component {
                     name="summary"
                     placeholder="Note Task summary"
                     value={this.state.summary}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -49,6 +73,7 @@ class AddNoteTask extends Component {
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
                     value={this.state.acceptanceCriteria}
+                    onChange={this.onChange}
                   />
                 </div>
                 <h6>Due Date</h6>
@@ -58,6 +83,7 @@ class AddNoteTask extends Component {
                     className="form-control form-control-lg"
                     name="dueDate"
                     value={this.state.dueDate}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -65,6 +91,7 @@ class AddNoteTask extends Component {
                     className="form-control form-control-lg"
                     name="priority"
                     value={this.state.priority}
+                    onChange={this.onChange}
                   >
                     <option value={0}>Select Priority</option>
                     <option value={1}>High</option>
@@ -78,6 +105,7 @@ class AddNoteTask extends Component {
                     className="form-control form-control-lg"
                     name="status"
                     value={this.state.status}
+                    onChange={this.onChange}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
