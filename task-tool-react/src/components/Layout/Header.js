@@ -6,7 +6,7 @@ class Header extends Component {
       <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
         <div className="container">
           <a className="navbar-brand" href="Dashboard.html">
-            Personal Task Management Tool
+            Personal Project Management Tool
           </a>
           <button
             className="navbar-toggler"

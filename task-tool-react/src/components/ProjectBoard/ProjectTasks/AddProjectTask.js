@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { addNoteTask } from "../../actions/backlogActions";
+import { addProjectTask } from "../../../actions/backlogActions";
 import PropTypes from "prop-types";
 
-class AddNoteTask extends Component {
+class AddProjectTask extends Component {
   constructor(props) {
     super(props);
     const { id } = this.props.match.params;
@@ -16,7 +16,7 @@ class AddNoteTask extends Component {
       status: "",
       priority: 0,
       dueDate: "",
-      taskIdentifier: id,
+      projectIdentifier: id,
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -29,10 +29,11 @@ class AddNoteTask extends Component {
     }
   }
 
+  // on change
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+  //on submit
   onSubmit(e) {
     e.preventDefault();
 
@@ -43,8 +44,8 @@ class AddNoteTask extends Component {
       priority: this.state.priority,
       dueDate: this.state.dueDate,
     };
-    this.props.addNoteTask(
-      this.state.taskIdentifier,
+    this.props.addProjectTask(
+      this.state.projectIdentifier,
       newTask,
       this.props.history
     );
@@ -58,11 +59,11 @@ class AddNoteTask extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/taskBoard/${id}`} className="btn btn-light">
-                Back to Task Board
+              <Link to={`/projectBoard/${id}`} className="btn btn-light">
+                Back to Project Board
               </Link>
-              <h4 className="display-4 text-center">Add Note</h4>
-              <p className="lead text-center">Task Name + Task Code</p>
+              <h4 className="display-4 text-center">Add Project Task</h4>
+              <p className="lead text-center">Project Name + Project Code</p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -71,7 +72,7 @@ class AddNoteTask extends Component {
                       "is-invalid": errors.summary,
                     })}
                     name="summary"
-                    placeholder="Note Task summary"
+                    placeholder="Project Task summary"
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
@@ -139,8 +140,8 @@ class AddNoteTask extends Component {
   }
 }
 
-AddNoteTask.propTypes = {
-  addNoteTask: PropTypes.func.isRequired,
+AddProjectTask.propTypes = {
+  addProjectTask: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
 };
 
@@ -148,4 +149,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { addNoteTask })(AddNoteTask);
+export default connect(mapStateToProps, { addProjectTask })(AddProjectTask);

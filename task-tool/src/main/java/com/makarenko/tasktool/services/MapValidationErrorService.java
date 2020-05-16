@@ -16,11 +16,12 @@ public class MapValidationErrorService {
     if (result.hasErrors()) {
       Map<String, String> errorMap = new HashMap<>();
 
-      for (FieldError fieldError : result.getFieldErrors()) {
-        errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+      for (FieldError error : result.getFieldErrors()) {
+        errorMap.put(error.getField(), error.getDefaultMessage());
       }
       return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
+
     return null;
   }
 }

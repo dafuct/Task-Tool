@@ -1,25 +1,27 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createTask } from "../../actions/taskActions";
+import { createProject } from "../../actions/projectActions";
 import classnames from "classnames";
 
-class AddTask extends Component {
+class AddProject extends Component {
   constructor() {
     super();
 
     this.state = {
-      taskName: "",
-      taskIdentifier: "",
+      projectName: "",
+      projectIdentifier: "",
       description: "",
       start_date: "",
       end_date: "",
       errors: {},
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  //life cycle hooks
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -32,15 +34,14 @@ class AddTask extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const newTask = {
-      taskName: this.state.taskName,
-      taskIdentifier: this.state.taskIdentifier,
+    const newProject = {
+      projectName: this.state.projectName,
+      projectIdentifier: this.state.projectIdentifier,
       description: this.state.description,
       start_date: this.state.start_date,
       end_date: this.state.end_date,
     };
-
-    this.props.createTask(newTask, this.props.history);
+    this.props.createProject(newProject, this.props.history);
   }
 
   render() {
@@ -52,38 +53,40 @@ class AddTask extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">Create Task</h5>
+                <h5 className="display-4 text-center">Create Project form</h5>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.taskName,
+                        "is-invalid": errors.projectName,
                       })}
-                      placeholder="Task Name"
-                      name="taskName"
-                      value={this.state.taskName}
+                      placeholder="Project Name"
+                      name="projectName"
+                      value={this.state.projectName}
                       onChange={this.onChange}
                     />
-                    {errors.taskName && (
-                      <div className="invalid-feedback">{errors.taskName}</div>
+                    {errors.projectName && (
+                      <div className="invalid-feedback">
+                        {errors.projectName}
+                      </div>
                     )}
                   </div>
                   <div className="form-group">
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.taskIdentifier,
+                        "is-invalid": errors.projectIdentifier,
                       })}
-                      placeholder="Unique Task ID"
-                      name="taskIdentifier"
-                      value={this.state.taskIdentifier}
+                      placeholder="Unique Project ID"
+                      name="projectIdentifier"
+                      value={this.state.projectIdentifier}
                       onChange={this.onChange}
                     />
-                    {errors.taskIdentifier && (
+                    {errors.projectIdentifier && (
                       <div className="invalid-feedback">
-                        {errors.taskIdentifier}
+                        {errors.projectIdentifier}
                       </div>
                     )}
                   </div>
@@ -92,7 +95,7 @@ class AddTask extends Component {
                       className={classnames("form-control form-control-lg", {
                         "is-invalid": errors.description,
                       })}
-                      placeholder="Task Description"
+                      placeholder="Project Description"
                       name="description"
                       value={this.state.description}
                       onChange={this.onChange}
@@ -138,8 +141,8 @@ class AddTask extends Component {
   }
 }
 
-AddTask.propTypes = {
-  createTask: PropTypes.func.isRequired,
+AddProject.propTypes = {
+  createProject: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
 };
 
@@ -147,4 +150,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { createTask })(AddTask);
+export default connect(mapStateToProps, { createProject })(AddProject);

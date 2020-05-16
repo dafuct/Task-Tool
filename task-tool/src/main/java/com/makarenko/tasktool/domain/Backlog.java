@@ -19,17 +19,17 @@ public class Backlog {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private Integer NTSequence = 0;
-  private String taskIdentifier;
+  private Integer PTSequence = 0;
+  private String projectIdentifier;
 
   @OneToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "task_id", nullable = false)
+  @JoinColumn(name = "project_id", nullable = false)
   @JsonIgnore
-  private Task task;
+  private Project project;
 
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH,
+  @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER,
       mappedBy = "backlog", orphanRemoval = true)
-  private List<NoteTask> noteTasks = new ArrayList<>();
+  private List<ProjectTask> projectTasks = new ArrayList<>();
 
   public Backlog() {
   }
@@ -42,35 +42,35 @@ public class Backlog {
     this.id = id;
   }
 
-  public Integer getNTSequence() {
-    return NTSequence;
+  public Integer getPTSequence() {
+    return PTSequence;
   }
 
-  public void setNTSequence(Integer PTSequence) {
-    this.NTSequence = PTSequence;
+  public void setPTSequence(Integer PTSequence) {
+    this.PTSequence = PTSequence;
   }
 
-  public String getTaskIdentifier() {
-    return taskIdentifier;
+  public String getProjectIdentifier() {
+    return projectIdentifier;
   }
 
-  public void setTaskIdentifier(String taskIdentifier) {
-    this.taskIdentifier = taskIdentifier;
+  public void setProjectIdentifier(String projectIdentifier) {
+    this.projectIdentifier = projectIdentifier;
   }
 
-  public Task getTask() {
-    return task;
+  public Project getProject() {
+    return project;
   }
 
-  public void setTask(Task task) {
-    this.task = task;
+  public void setProject(Project project) {
+    this.project = project;
   }
 
-  public List<NoteTask> getNoteTasks() {
-    return noteTasks;
+  public List<ProjectTask> getProjectTasks() {
+    return projectTasks;
   }
 
-  public void setNoteTasks(List<NoteTask> noteTasks) {
-    this.noteTasks = noteTasks;
+  public void setProjectTasks(List<ProjectTask> projectTasks) {
+    this.projectTasks = projectTasks;
   }
 }

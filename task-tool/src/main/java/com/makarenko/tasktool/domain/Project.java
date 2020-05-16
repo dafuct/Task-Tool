@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -18,33 +17,34 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Task {
+public class Project {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @NotBlank(message = "Task name is required")
-  private String taskName;
-  @NotBlank(message = "Task Identifier is required")
-  @Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
+  @NotBlank(message = "Project name is required")
+  private String projectName;
+  @NotBlank(message ="Project Identifier is required")
+  @Size(min=4, max=5, message = "Please use 4 to 5 characters")
   @Column(updatable = false, unique = true)
-  private String taskIdentifier;
-  @NotBlank(message = "Task description is required")
+  private String projectIdentifier;
+  @NotBlank(message = "Project description is required")
   private String description;
   @JsonFormat(pattern = "yyyy-mm-dd")
   private Date start_date;
   @JsonFormat(pattern = "yyyy-mm-dd")
   private Date end_date;
   @JsonFormat(pattern = "yyyy-mm-dd")
+  @Column(updatable = false)
   private Date created_At;
   @JsonFormat(pattern = "yyyy-mm-dd")
   private Date updated_At;
 
-  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "task")
+  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
   @JsonIgnore
   private Backlog backlog;
 
-  public Task() {
+  public Project() {
   }
 
   public Long getId() {
@@ -55,20 +55,20 @@ public class Task {
     this.id = id;
   }
 
-  public String getTaskName() {
-    return taskName;
+  public String getProjectName() {
+    return projectName;
   }
 
-  public void setTaskName(String taskName) {
-    this.taskName = taskName;
+  public void setProjectName(String projectName) {
+    this.projectName = projectName;
   }
 
-  public String getTaskIdentifier() {
-    return taskIdentifier;
+  public String getProjectIdentifier() {
+    return projectIdentifier;
   }
 
-  public void setTaskIdentifier(String taskIdentifier) {
-    this.taskIdentifier = taskIdentifier;
+  public void setProjectIdentifier(String projectIdentifier) {
+    this.projectIdentifier = projectIdentifier;
   }
 
   public String getDescription() {
@@ -120,12 +120,12 @@ public class Task {
   }
 
   @PrePersist
-  protected void onCreate() {
+  protected void onCreate(){
     this.created_At = new Date();
   }
 
   @PreUpdate
-  protected void onUpdate() {
+  protected void onUpdate(){
     this.updated_At = new Date();
   }
 }

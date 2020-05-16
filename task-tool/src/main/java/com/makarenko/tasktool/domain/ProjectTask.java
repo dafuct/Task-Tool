@@ -2,7 +2,6 @@ package com.makarenko.tasktool.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,14 +15,14 @@ import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class NoteTask {
+public class ProjectTask {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @Column(updatable = false, unique = true)
-  private String taskSequence;
-  @NotBlank(message = "Please include a task summary")
+  private String projectSequence;
+  @NotBlank(message = "Please include a project summary")
   private String summary;
   private String acceptanceCriteria;
   private String status;
@@ -36,21 +35,11 @@ public class NoteTask {
   private Backlog backlog;
 
   @Column(updatable = false)
-  private String taskIdentifier;
+  private String projectIdentifier;
   private Date create_At;
   private Date update_At;
 
-  public NoteTask() {
-  }
-
-  @PrePersist
-  protected void onCreate() {
-    this.create_At = new Date();
-  }
-
-  @PreUpdate
-  protected void onUpdate() {
-    this.update_At = new Date();
+  public ProjectTask() {
   }
 
   public Long getId() {
@@ -61,12 +50,12 @@ public class NoteTask {
     this.id = id;
   }
 
-  public String getTaskSequence() {
-    return taskSequence;
+  public String getProjectSequence() {
+    return projectSequence;
   }
 
-  public void setTaskSequence(String taskSequence) {
-    this.taskSequence = taskSequence;
+  public void setProjectSequence(String projectSequence) {
+    this.projectSequence = projectSequence;
   }
 
   public String getSummary() {
@@ -109,12 +98,12 @@ public class NoteTask {
     this.dueDate = dueDate;
   }
 
-  public String getTaskIdentifier() {
-    return taskIdentifier;
+  public String getProjectIdentifier() {
+    return projectIdentifier;
   }
 
-  public void setTaskIdentifier(String taskIdentifier) {
-    this.taskIdentifier = taskIdentifier;
+  public void setProjectIdentifier(String projectIdentifier) {
+    this.projectIdentifier = projectIdentifier;
   }
 
   public Date getCreate_At() {
@@ -141,17 +130,28 @@ public class NoteTask {
     this.backlog = backlog;
   }
 
+  @PrePersist
+  protected void onCreate() {
+    this.create_At = new Date();
+  }
+
+  @PreUpdate
+  protected void onUpdate() {
+    this.update_At = new Date();
+  }
+
   @Override
   public String toString() {
-    return "NoteTask{" +
+    return "ProjectTask{" +
         "id=" + id +
-        ", taskSequence='" + taskSequence + '\'' +
+        ", projectSequence='" + projectSequence + '\'' +
         ", summary='" + summary + '\'' +
         ", acceptanceCriteria='" + acceptanceCriteria + '\'' +
         ", status='" + status + '\'' +
         ", priority=" + priority +
         ", dueDate=" + dueDate +
-        ", taskIdentifier='" + taskIdentifier + '\'' +
+        ", backlog=" + backlog +
+        ", projectIdentifier='" + projectIdentifier + '\'' +
         ", create_At=" + create_At +
         ", update_At=" + update_At +
         '}';

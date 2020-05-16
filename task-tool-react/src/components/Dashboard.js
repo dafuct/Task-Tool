@@ -1,30 +1,31 @@
 import React, { Component } from "react";
 import ProjectItem from "./Project/ProjectItem";
-import CreateTaskButton from "./Project/CreateTaskButton";
+import CreateProjectButton from "./Project/CreateProjectButton";
 import { connect } from "react-redux";
-import { getTasks } from "../actions/taskActions";
+import { getProjects } from "../actions/projectActions";
 import PropTypes from "prop-types";
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.getTasks();
+    this.props.getProjects();
   }
 
   render() {
-    const { tasks } = this.props.task;
+    const { projects } = this.props.project;
 
     return (
       <div className="projects">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">TASKS</h1>
+              <h1 className="display-4 text-center">Projects</h1>
               <br />
-              <CreateTaskButton />
+              <CreateProjectButton />
+
               <br />
               <hr />
-              {tasks.map((task) => (
-                <ProjectItem key={task.id} task={task} />
+              {projects.map((project) => (
+                <ProjectItem key={project.id} project={project} />
               ))}
             </div>
           </div>
@@ -36,11 +37,11 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   project: PropTypes.object.isRequired,
-  getTasks: PropTypes.func.isRequired,
+  getProjects: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  task: state.task,
+  project: state.project,
 });
 
-export default connect(mapStateToProps, { getTasks })(Dashboard);
+export default connect(mapStateToProps, { getProjects })(Dashboard);

@@ -1,8 +1,12 @@
-import { GET_BACKLOG, GET_NOTE_TASK, DELETE_NOTE_TASK } from "../actions/types";
+import {
+  GET_BACKLOG,
+  GET_PROJECT_TASK,
+  DELETE_PROJECT_TASK,
+} from "../actions/types";
 
 const initialState = {
-  note_tasks: [],
-  note_task: {},
+  project_tasks: [],
+  project_task: {},
 };
 
 export default function (state = initialState, action) {
@@ -10,19 +14,22 @@ export default function (state = initialState, action) {
     case GET_BACKLOG:
       return {
         ...state,
-        note_tasks: action.payload,
+        project_tasks: action.payload,
       };
 
-    case GET_NOTE_TASK:
+    case GET_PROJECT_TASK:
       return {
         ...state,
-        note_task: action.payload,
+        project_task: action.payload,
       };
 
-    case DELETE_NOTE_TASK:
+    case DELETE_PROJECT_TASK:
       return {
         ...state,
+
+        // TO_DO
       };
+
     default:
       return state;
   }

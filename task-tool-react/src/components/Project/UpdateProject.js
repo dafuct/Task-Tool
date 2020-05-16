@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import { getTask, createTask } from "../../actions/taskActions";
+import { getProject, createProject } from "../../actions/projectActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
 
-class UpdateTask extends Component {
+class UpdateProject extends Component {
+  //set state
   constructor() {
     super();
+
     this.state = {
       id: "",
-      taskName: "",
-      taskIdentifier: "",
+      projectName: "",
+      projectIdentifier: "",
       description: "",
       start_date: "",
       end_date: "",
@@ -26,17 +28,17 @@ class UpdateTask extends Component {
     }
     const {
       id,
-      taskName,
-      taskIdentifier,
+      projectName,
+      projectIdentifier,
       description,
       start_date,
       end_date,
-    } = nextProps.task;
+    } = nextProps.project;
 
     this.setState({
       id,
-      taskName,
-      taskIdentifier,
+      projectName,
+      projectIdentifier,
       description,
       start_date,
       end_date,
@@ -45,7 +47,7 @@ class UpdateTask extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.getTask(id, this.props.history);
+    this.props.getProject(id, this.props.history);
   }
 
   onChange(e) {
@@ -55,16 +57,16 @@ class UpdateTask extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const updateTask = {
+    const updateProject = {
       id: this.state.id,
-      taskName: this.state.taskName,
-      taskIdentifier: this.state.taskIdentifier,
+      projectName: this.state.projectName,
+      projectIdentifier: this.state.projectIdentifier,
       description: this.state.description,
       start_date: this.state.start_date,
       end_date: this.state.end_date,
     };
 
-    this.props.createTask(updateTask, this.props.history);
+    this.props.createProject(updateProject, this.props.history);
   }
 
   render() {
@@ -74,31 +76,31 @@ class UpdateTask extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h5 className="display-4 text-center">UPDATE TASK</h5>
+              <h5 className="display-4 text-center">Update Project form</h5>
               <hr />
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
                     className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.taskName,
+                      "is-invalid": errors.projectName,
                     })}
-                    placeholder="Task Name"
-                    name="taskName"
-                    value={this.state.taskName}
+                    placeholder="Project Name"
+                    name="projectName"
+                    value={this.state.projectName}
                     onChange={this.onChange}
                   />
-                  {errors.taskName && (
-                    <div className="invalid-feedback">{errors.taskName}</div>
+                  {errors.projectName && (
+                    <div className="invalid-feedback">{errors.projectName}</div>
                   )}
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Unique Task ID"
-                    name="taskIdentifier"
-                    value={this.state.taskIdentifier}
+                    placeholder="Unique Project ID"
+                    name="projectIdentifier"
+                    value={this.state.projectIdentifier}
                     onChange={this.onChange}
                     disabled
                   />
@@ -108,7 +110,7 @@ class UpdateTask extends Component {
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.description,
                     })}
-                    placeholder="Task Description"
+                    placeholder="Project Description"
                     name="description"
                     onChange={this.onChange}
                     value={this.state.description}
@@ -123,8 +125,8 @@ class UpdateTask extends Component {
                     type="date"
                     className="form-control form-control-lg"
                     name="start_date"
-                    onChange={this.onChange}
                     value={this.state.start_date}
+                    onChange={this.onChange}
                   />
                 </div>
                 <h6>Estimated End Date</h6>
@@ -133,8 +135,8 @@ class UpdateTask extends Component {
                     type="date"
                     className="form-control form-control-lg"
                     name="end_date"
-                    onChange={this.onChange}
                     value={this.state.end_date}
+                    onChange={this.onChange}
                   />
                 </div>
 
@@ -151,16 +153,18 @@ class UpdateTask extends Component {
   }
 }
 
-UpdateTask.propTypes = {
-  getTask: PropTypes.func.isRequired,
-  createTask: PropTypes.func.isRequired,
-  task: PropTypes.object.isRequired,
+UpdateProject.propTypes = {
+  getProject: PropTypes.func.isRequired,
+  createProject: PropTypes.func.isRequired,
+  project: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  task: state.task.task,
+  project: state.project.project,
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { getTask, createTask })(UpdateTask);
+export default connect(mapStateToProps, { getProject, createProject })(
+  UpdateProject
+);
