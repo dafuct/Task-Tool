@@ -13,6 +13,7 @@ class TaskBoard extends Component {
 
   render() {
     const { id } = this.props.match.params;
+    const { notes_task } = this.props.backlog;
     return (
       <div className="container">
         <Link to={`/addNoteTask/${id}`} className="btn btn-primary mb-3">
@@ -20,7 +21,7 @@ class TaskBoard extends Component {
         </Link>
         <br />
         <hr />
-        <Backlog />
+        <Backlog notes_task_prop={notes_task} />
       </div>
     );
   }
