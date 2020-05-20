@@ -24,6 +24,8 @@ public class UserServiceImpl implements UserService {
   public User saveUser(User user) {
     try {
       user.setPassword(encoder.encode(user.getPassword()));
+      user.setUsername(user.getUsername());
+      user.setConfirmPassword("");
       return userRepository.save(user);
     } catch (Exception e) {
       throw new UsernameAlreadyExistsException(

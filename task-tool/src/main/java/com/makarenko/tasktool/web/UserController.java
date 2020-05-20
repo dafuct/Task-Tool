@@ -3,6 +3,7 @@ package com.makarenko.tasktool.web;
 import com.makarenko.tasktool.domain.User;
 import com.makarenko.tasktool.services.UserService;
 import com.makarenko.tasktool.services.impl.MapValidationErrorService;
+import com.makarenko.tasktool.validator.UserValidator;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,17 +20,21 @@ public class UserController {
 
   private final MapValidationErrorService mapValidationErrorService;
   private final UserService userService;
+  private final UserValidator userValidator;
 
   @Autowired
   public UserController(
       MapValidationErrorService mapValidationErrorService,
-      UserService userService) {
+      UserService userService, UserValidator userValidator) {
     this.mapValidationErrorService = mapValidationErrorService;
     this.userService = userService;
+    this.userValidator = userValidator;
   }
 
   @PostMapping("/register")
   public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result) {
+    userValidator.validate(user, result);
+
     ResponseEntity<?> errorMap = mapValidationErrorService.mapValidationService(result);
     if(errorMap != null) {
       return errorMap;
