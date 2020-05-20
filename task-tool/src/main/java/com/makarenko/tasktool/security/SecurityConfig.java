@@ -1,12 +1,20 @@
 package com.makarenko.tasktool.security;
 
+import static com.makarenko.tasktool.security.SecurityConstants.*;
+
+import com.makarenko.tasktool.services.impl.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -14,10 +22,27 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+  private final CustomUserDetailService customUserDetailService;
+  private final BCryptPasswordEncoder encoder;
 
   @Autowired
-  public SecurityConfig(JwtAuthenticationEntryPoint authenticationEntryPoint) {
+  public SecurityConfig(JwtAuthenticationEntryPoint authenticationEntryPoint,
+      CustomUserDetailService customUserDetailService,
+      BCryptPasswordEncoder encoder) {
     this.authenticationEntryPoint = authenticationEntryPoint;
+    this.customUserDetailService = customUserDetailService;
+    this.encoder = encoder;
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(customUserDetailService).passwordEncoder(encoder);
+  }
+
+  @Override
+  @Bean(BeanIds.AUTHENTICATION_MANAGER)
+  protected AuthenticationManager authenticationManager() throws Exception {
+    return super.authenticationManager();
   }
 
   @Override
@@ -42,8 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/**/*.css",
             "/**/*.js")
         .permitAll()
-        .antMatchers("/api/users/**")
-        .permitAll()
+        .antMatchers(SIGN_UP_URLS).permitAll()
+        .antMatchers(H2_URL).permitAll()
         .anyRequest().authenticated();
   }
 }
