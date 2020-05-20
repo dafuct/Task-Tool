@@ -1,6 +1,7 @@
 package com.makarenko.tasktool.services.impl;
 
 import com.makarenko.tasktool.domain.User;
+import com.makarenko.tasktool.exceptions.UsernameAlreadyExistsException;
 import com.makarenko.tasktool.repositories.UserRepository;
 import com.makarenko.tasktool.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,12 @@ public class UserServiceImpl implements UserService {
   }
 
   public User saveUser(User user) {
-    user.setPassword(encoder.encode(user.getPassword()));
-    return userRepository.save(user);
+    try {
+      user.setPassword(encoder.encode(user.getPassword()));
+      return userRepository.save(user);
+    } catch (Exception e) {
+      throw new UsernameAlreadyExistsException(
+          "Username '" + user.getUsername() + "' already exists");
+    }
   }
 }
