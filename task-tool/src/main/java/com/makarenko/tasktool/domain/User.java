@@ -1,5 +1,7 @@
 package com.makarenko.tasktool.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +16,14 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-public class User {
+public class User implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,5 +53,35 @@ public class User {
   @PreUpdate
   protected void onUpdate(){
     this.update_At = new Date();
+  }
+
+  @Override
+  @JsonIgnore
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return null;
+  }
+
+  @Override
+  @JsonIgnore
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  @JsonIgnore
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  @JsonIgnore
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  @JsonIgnore
+  public boolean isEnabled() {
+    return true;
   }
 }
