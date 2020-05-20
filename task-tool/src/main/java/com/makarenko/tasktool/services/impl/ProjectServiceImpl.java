@@ -2,9 +2,11 @@ package com.makarenko.tasktool.services.impl;
 
 import com.makarenko.tasktool.domain.Backlog;
 import com.makarenko.tasktool.domain.Project;
+import com.makarenko.tasktool.domain.User;
 import com.makarenko.tasktool.exceptions.ProjectIdException;
 import com.makarenko.tasktool.repositories.BacklogRepository;
 import com.makarenko.tasktool.repositories.ProjectRepository;
+import com.makarenko.tasktool.repositories.UserRepository;
 import com.makarenko.tasktool.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +16,24 @@ public class ProjectServiceImpl implements ProjectService {
 
   private final ProjectRepository projectRepository;
   private final BacklogRepository backlogRepository;
+  private final UserRepository userRepository;
 
   @Autowired
   public ProjectServiceImpl(ProjectRepository projectRepository,
-      BacklogRepository backlogRepository) {
+      BacklogRepository backlogRepository,
+      UserRepository userRepository) {
     this.projectRepository = projectRepository;
     this.backlogRepository = backlogRepository;
+    this.userRepository = userRepository;
   }
 
-  public Project saveOrUpdateProject(Project project) {
+  public Project saveOrUpdateProject(Project project, String username) {
     try {
-      project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+      User user = userRepository.findByUsername(username);
+      project.setUser(user);
+      project.setProjectLeader(user.getUsername());
 
+      project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
       if (project.getId() == null) {
         Backlog backlog = new Backlog();
         project.setBacklog(backlog);
