@@ -1,18 +1,13 @@
 package com.makarenko.tasktool.exceptions;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class ProjectNotFoundExceptionResponse {
 
   private String ProjectNotFound;
-
-  public ProjectNotFoundExceptionResponse(String projectNotFound) {
-    ProjectNotFound = projectNotFound;
-  }
-
-  public String getProjectNotFound() {
-    return ProjectNotFound;
-  }
-
-  public void setProjectNotFound(String projectNotFound) {
-    ProjectNotFound = projectNotFound;
-  }
 }

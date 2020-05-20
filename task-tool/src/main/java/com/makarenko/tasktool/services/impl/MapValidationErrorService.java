@@ -1,4 +1,4 @@
-package com.makarenko.tasktool.services;
+package com.makarenko.tasktool.services.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,6 @@ import org.springframework.validation.FieldError;
 public class MapValidationErrorService {
 
   public ResponseEntity<?> mapValidationService(BindingResult result) {
-
     if (result.hasErrors()) {
       Map<String, String> errorMap = new HashMap<>();
 
