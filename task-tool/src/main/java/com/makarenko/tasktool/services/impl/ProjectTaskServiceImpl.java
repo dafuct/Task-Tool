@@ -7,6 +7,7 @@ import com.makarenko.tasktool.exceptions.ProjectNotFoundException;
 import com.makarenko.tasktool.repositories.BacklogRepository;
 import com.makarenko.tasktool.repositories.ProjectRepository;
 import com.makarenko.tasktool.repositories.ProjectTaskRepository;
+import com.makarenko.tasktool.services.ProjectService;
 import com.makarenko.tasktool.services.ProjectTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,48 +18,45 @@ public class ProjectTaskServiceImpl implements ProjectTaskService {
   private final BacklogRepository backlogRepository;
   private final ProjectTaskRepository projectTaskRepository;
   private final ProjectRepository projectRepository;
+  private final ProjectService projectService;
 
   @Autowired
   public ProjectTaskServiceImpl(BacklogRepository backlogRepository,
       ProjectTaskRepository projectTaskRepository,
-      ProjectRepository projectRepository) {
+      ProjectRepository projectRepository,
+      ProjectService projectService) {
     this.backlogRepository = backlogRepository;
     this.projectTaskRepository = projectTaskRepository;
     this.projectRepository = projectRepository;
+    this.projectService = projectService;
   }
 
-  public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask) {
-    try {
-      Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
-      projectTask.setBacklog(backlog);
-      Integer BacklogSequence = backlog.getPTSequence();
-      BacklogSequence++;
+  public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask,
+      String username) {
+    Backlog backlog = projectService.findProjectByIdentifier(projectIdentifier, username)
+        .getBacklog();
+    projectTask.setBacklog(backlog);
+    Integer BacklogSequence = backlog.getPTSequence();
+    BacklogSequence++;
 
-      backlog.setPTSequence(BacklogSequence);
+    backlog.setPTSequence(BacklogSequence);
 
-      projectTask.setProjectSequence(backlog.getProjectIdentifier() + "-" + BacklogSequence);
-      projectTask.setProjectIdentifier(projectIdentifier);
+    projectTask.setProjectSequence(backlog.getProjectIdentifier() + "-" + BacklogSequence);
+    projectTask.setProjectIdentifier(projectIdentifier);
 
-      if (projectTask.getStatus() == "" || projectTask.getStatus() == null) {
-        projectTask.setStatus("TO_DO");
-      }
-
-      if (projectTask.getPriority() == 0 || projectTask.getPriority() == null) {
-        projectTask.setPriority(3);
-      }
-
-      return projectTaskRepository.save(projectTask);
-    } catch (Exception e) {
-      throw new ProjectNotFoundException("Project not Found");
+    if (projectTask.getStatus() == "" || projectTask.getStatus() == null) {
+      projectTask.setStatus("TO_DO");
     }
+
+    if (projectTask.getPriority() == null || projectTask.getPriority() == 0) {
+      projectTask.setPriority(3);
+    }
+
+    return projectTaskRepository.save(projectTask);
   }
 
-  public Iterable<ProjectTask> findBacklogById(String id) {
-    Project project = projectRepository.findByProjectIdentifier(id);
-
-    if (project == null) {
-      throw new ProjectNotFoundException("Project with ID: '" + id + "' does not exist");
-    }
+  public Iterable<ProjectTask> findBacklogById(String id, String username) {
+    projectService.findProjectByIdentifier(id, username);
     return projectTaskRepository.findByProjectIdentifierOrderByPriority(id);
   }
 
