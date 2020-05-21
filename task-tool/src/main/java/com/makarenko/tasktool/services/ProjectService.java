@@ -6,9 +6,9 @@ public interface ProjectService {
 
   Project saveOrUpdateProject(Project project, String username);
 
-  Project findProjectByIdentifier(String projectId);
+  Project findProjectByIdentifier(String projectId,  String username);
 
-  Iterable<Project> findAllProjects();
+  Iterable<Project> findAllProjects(String username);
 
-  void deleteProjectByIdentifier(String projectId);
+  void deleteProjectByIdentifier(String projectId, String username);
 }
