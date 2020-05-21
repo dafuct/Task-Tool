@@ -29,6 +29,16 @@ public class ProjectServiceImpl implements ProjectService {
   }
 
   public Project saveOrUpdateProject(Project project, String username) {
+    if (project.getId() != null) {
+      Project existProject = projectRepository
+          .findByProjectIdentifier(project.getProjectIdentifier());
+      if (existProject != null && (!existProject.getProjectLeader().equals(username))) {
+        throw new ProjectNotFoundException("Project not found in your account");
+      } else if (existProject == null) {
+        throw new ProjectNotFoundException("Project with ID: '" + project.getProjectIdentifier()
+            + "' cannot be updated because it doesn`t exist");
+      }
+    }
     try {
       User user = userRepository.findByUsername(username);
       project.setUser(user);
