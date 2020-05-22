@@ -5,30 +5,38 @@ img {
 .navbar {
   background-color: #e3f2fd;
 }
+
 .fa.fa-edit {
   color: #18a2b9;
 }
 
 .list-group-item.delete:hover {
   cursor: -webkit-grab;
-  background-color: pink;
+  background-color: rgba(152, 156, 167, 0.315);
 }
 
 .list-group-item.update:hover {
   cursor: -webkit-grab;
-  background-color: gainsboro;
+  background-color: rgba(152, 156, 167, 0.315);
 }
 
 .list-group-item.board:hover {
   cursor: -webkit-grab;
-  background-color: gainsboro;
+  background-color: rgba(152, 156, 167, 0.315);
+}
+
+.list-group-item.board,
+.list-group-item.update,
+.list-group-item.delete {
+  background-color: rgb(165, 170, 195);
 }
 
 .fa.fa-minus-circle {
-  color: red;
+  color: rgb(156, 57, 57);
 }
 
 .landing {
+  background-color: slategray;
   position: relative;
   /* background: url("../img/showcase.jpg") no-repeat; */
   background-size: cover;
@@ -36,6 +44,40 @@ img {
   height: 100vh;
   margin-top: -24px;
   margin-bottom: -50px;
+}
+
+.register {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+  background-color: slategray;
+}
+
+.login {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+  background-color: slategray;
+}
+
+#card {
+  background-color: rgba(171, 182, 218, 0.493);
+}
+
+.projects {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+  background-color: slategray;
 }
 
 .landing-inner {

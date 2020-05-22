@@ -17,7 +17,7 @@ class Header extends Component {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/dashboard">
-              Dashboard
+              Доска
             </Link>
           </li>
         </ul>
@@ -35,7 +35,7 @@ class Header extends Component {
               to="/logout"
               onClick={this.logout.bind(this)}
             >
-              Logout
+              Выйти
             </Link>
           </li>
         </ul>
@@ -47,12 +47,12 @@ class Header extends Component {
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/register">
-              Sign Up
+              Регистрация
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/login">
-              Login
+              Логин
             </Link>
           </li>
         </ul>
@@ -68,10 +68,10 @@ class Header extends Component {
     }
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            Personal Project Management Tool
+            Инструмент управления целями
           </Link>
           <button
             className="navbar-toggler"

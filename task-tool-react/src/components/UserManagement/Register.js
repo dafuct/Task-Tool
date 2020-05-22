@@ -52,8 +52,8 @@ class Register extends Component {
     return (
       <div className="register">
         <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
+          <div className="row justify-content-center">
+            <div className="col-md-8 mt-5">
               <h1 className="display-4 text-center">Создать аккаунт</h1>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
@@ -120,7 +120,7 @@ class Register extends Component {
                 </div>
                 <input
                   type="submit"
-                  className="btn btn-info btn-block mt-4"
+                  className="btn btn-block btn-dark mt-4"
                   value="Регистрация"
                 />
               </form>

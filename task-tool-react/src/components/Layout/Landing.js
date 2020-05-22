@@ -17,17 +17,18 @@ class Landing extends Component {
             <div className="row">
               <div className="col-md-12 text-center">
                 <h1 className="display-3 mb-4">
-                  Personal Project Management Tool
+                  Личный Инструмент для Управления Целями
                 </h1>
                 <p className="lead">
-                  Create your account to join active projects or start your own
+                  Создайте свой аккаунт, чтобы присоединиться к активным целям
+                  или начать новую цель
                 </p>
                 <hr />
-                <Link className="btn btn-lg btn-primary mr-2" to="/register">
-                  Sign Up
+                <Link className="btn btn-lg btn-dark mr-2" to="/register">
+                  Регистрация
                 </Link>
                 <Link className="btn btn-lg btn-secondary mr-2" to="/login">
-                  Login
+                  Логин
                 </Link>
               </div>
             </div>
