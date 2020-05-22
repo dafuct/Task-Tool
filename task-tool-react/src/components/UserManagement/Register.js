@@ -19,6 +19,12 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
     const newUser = {
@@ -36,55 +42,81 @@ class Register extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div className="register">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">Create your Account</p>
+              <h1 className="display-4 text-center">Создать аккаунт</h1>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
-                    placeholder="Full Name"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.fullName,
+                    })}
+                    placeholder="полное имя"
                     name="fullName"
                     value={this.state.fullName}
                     onChange={this.onChange}
                   />
+                  {errors.fullName && (
+                    <div className="invalid-feedback">{errors.fullName}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
-                    placeholder="Email Address (Username)"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.username,
+                    })}
+                    placeholder="Email адрес (имя пользователя)"
                     name="username"
                     value={this.state.username}
                     onChange={this.onChange}
                   />
+                  {errors.username && (
+                    <div className="invalid-feedback">{errors.username}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
-                    className="form-control form-control-lg"
-                    placeholder="Password"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.password,
+                    })}
+                    placeholder="пароль"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
                   />
+                  {errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
-                    className="form-control form-control-lg"
-                    placeholder="Confirm Password"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.confirmPassword,
+                    })}
+                    placeholder="повторите пароль"
                     name="confirmPassword"
                     value={this.state.confirmPassword}
                     onChange={this.onChange}
                   />
+                  {errors.confirmPassword && (
+                    <div className="invalid-feedback">
+                      {errors.confirmPassword}
+                    </div>
+                  )}
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input
+                  type="submit"
+                  className="btn btn-info btn-block mt-4"
+                  value="Регистрация"
+                />
               </form>
             </div>
           </div>
