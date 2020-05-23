@@ -59,7 +59,7 @@ public class UserController {
             loginRequest.getPassword()));
 
     SecurityContextHolder.getContext().setAuthentication(authenticate);
-    String jwt = TOKEN_PREFIX + jwtTokenProvider.generateToken(authenticate);
+    String jwt = TOKEN_PREFIX + jwtTokenProvider. generateToken(authenticate);
     return ResponseEntity.ok(new JwtLoginSuccessResponse(true, jwt));
   }
 

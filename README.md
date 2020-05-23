@@ -1,5 +1,7 @@
 Web site management goal and task https://goal-task.herokuapp.com
-USED technologies:
+
+USED technologies:  
+
   BackEnd
   - Spring Boot
   - Spring Security
@@ -7,6 +9,7 @@ USED technologies:
   - JWT Token
   - Lombok
   - MySql
+  
   Frontend:
   - React JS
   
