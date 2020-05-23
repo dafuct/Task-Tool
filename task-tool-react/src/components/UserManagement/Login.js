@@ -67,7 +67,9 @@ class Login extends Component {
                     onChange={this.onChange}
                   />
                   {errors.username && (
-                    <div className="invalid-feedback">{errors.username}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.username}
+                    </div>
                   )}
                 </div>
                 <div className="form-group">
@@ -82,7 +84,9 @@ class Login extends Component {
                     onChange={this.onChange}
                   />
                   {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.password}
+                    </div>
                   )}
                 </div>
                 <input

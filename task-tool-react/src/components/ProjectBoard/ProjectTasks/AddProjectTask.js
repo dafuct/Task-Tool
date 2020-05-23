@@ -56,13 +56,14 @@ class AddProjectTask extends Component {
     return (
       <div className="add-PBI">
         <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <Link to={`/projectBoard/${id}`} className="btn btn-light">
-                Back to Project Board
+          <div className="row justify-content-center">
+            <div className="col-md-8 mt-4">
+              <Link to={`/projectBoard/${id}`} className="btn btn-dark">
+                Назад к списку задач
               </Link>
-              <h4 className="display-4 text-center">Add Project Task</h4>
-              <p className="lead text-center">Project Name + Project Code</p>
+              <h4 className="display-4 text-center mt-2 pb-2">
+                Добавить задачу
+              </h4>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -71,24 +72,26 @@ class AddProjectTask extends Component {
                       "is-invalid": errors.summary,
                     })}
                     name="summary"
-                    placeholder="Project Task summary"
+                    placeholder="Название задачи"
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
                   {errors.summary && (
-                    <div className="invalid-feedback">{errors.summary}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.summary}
+                    </div>
                   )}
                 </div>
                 <div className="form-group">
                   <textarea
                     className="form-control form-control-lg"
-                    placeholder="Acceptance Criteria"
+                    placeholder="Критерии окончания задачи"
                     name="acceptanceCriteria"
                     value={this.state.acceptanceCriteria}
                     onChange={this.onChange}
                   />
                 </div>
-                <h6>Due Date</h6>
+                <h6>Срок сдачи</h6>
                 <div className="form-group">
                   <input
                     type="date"
@@ -105,10 +108,10 @@ class AddProjectTask extends Component {
                     value={this.state.priority}
                     onChange={this.onChange}
                   >
-                    <option value={0}>Select Priority</option>
-                    <option value={1}>High</option>
-                    <option value={2}>Medium</option>
-                    <option value={3}>Low</option>
+                    <option value={0}>Выбрать приоритет</option>
+                    <option value={1}>Высокий</option>
+                    <option value={2}>Средний</option>
+                    <option value={3}>Низкий</option>
                   </select>
                 </div>
 
@@ -119,16 +122,17 @@ class AddProjectTask extends Component {
                     value={this.state.status}
                     onChange={this.onChange}
                   >
-                    <option value="">Select Status</option>
-                    <option value="TO_DO">TO DO</option>
-                    <option value="IN_PROGRESS">IN PROGRESS</option>
-                    <option value="DONE">DONE</option>
+                    <option value="">Выбрать статус</option>
+                    <option value="TO_DO">Начать</option>
+                    <option value="IN_PROGRESS">Выполняется</option>
+                    <option value="DONE">Закончена</option>
                   </select>
                 </div>
 
                 <input
                   type="submit"
-                  className="btn btn-primary btn-block mt-4"
+                  className="btn btn-dark btn-block mt-4"
+                  value="Создать"
                 />
               </form>
             </div>

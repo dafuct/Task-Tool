@@ -51,8 +51,8 @@ class AddProject extends Component {
       <div>
         <div className="project">
           <div className="container">
-            <div className="row">
-              <div className="col-md-8 m-auto">
+            <div className="row justify-content-center">
+              <div className="col-md-8 mt-4">
                 <h5 className="display-4 text-center">Создание цели</h5>
                 <hr />
                 <form onSubmit={this.onSubmit}>
@@ -68,7 +68,7 @@ class AddProject extends Component {
                       onChange={this.onChange}
                     />
                     {errors.projectName && (
-                      <div className="invalid-feedback">
+                      <div className="p-1 mb-1 bg-danger rounded-sm text-white">
                         {errors.projectName}
                       </div>
                     )}
@@ -85,7 +85,7 @@ class AddProject extends Component {
                       onChange={this.onChange}
                     />
                     {errors.projectIdentifier && (
-                      <div className="invalid-feedback">
+                      <div className="p-1 mb-1 bg-danger rounded-sm text-white">
                         {errors.projectIdentifier}
                       </div>
                     )}
@@ -101,7 +101,7 @@ class AddProject extends Component {
                       onChange={this.onChange}
                     />
                     {errors.description && (
-                      <div className="invalid-feedback">
+                      <div className="p-1 mb-1 bg-danger rounded-sm text-white">
                         {errors.description}
                       </div>
                     )}
@@ -129,7 +129,7 @@ class AddProject extends Component {
 
                   <input
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn btn-dark btn-block mt-4"
                     value="Создать"
                   />
                 </form>

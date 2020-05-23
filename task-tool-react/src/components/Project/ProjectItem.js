@@ -16,9 +16,10 @@ class ProjectItem extends Component {
         <div className="card card-body mb-3" id="card">
           <div className="row justify-content-between">
             <div className="col-lg-8 col-md-4 col-8">
-              <span className="mx-auto">{project.projectName}</span>
+              <h3 className="mx-auto">{project.projectName}</h3>
               <hr />
-              <p>{project.description}</p>
+              <h4>{project.description}</h4>
+              <p>Конечная дата: {project.end_date}</p>
             </div>
             <div className="col-md-3 d-none d-lg-block">
               <ul className="list-group">

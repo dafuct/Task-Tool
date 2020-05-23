@@ -18,7 +18,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">СПИСОК ЦЕЛЕЙ</h1>
+              <h1 className="display-4 text-center mt-4">СПИСОК ЦЕЛЕЙ</h1>
               <br />
               <CreateProjectButton />
 

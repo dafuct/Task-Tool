@@ -1,11 +1,8 @@
 package com.makarenko.tasktool.services.impl;
 
 import com.makarenko.tasktool.domain.Backlog;
-import com.makarenko.tasktool.domain.Project;
 import com.makarenko.tasktool.domain.ProjectTask;
 import com.makarenko.tasktool.exceptions.ProjectNotFoundException;
-import com.makarenko.tasktool.repositories.BacklogRepository;
-import com.makarenko.tasktool.repositories.ProjectRepository;
 import com.makarenko.tasktool.repositories.ProjectTaskRepository;
 import com.makarenko.tasktool.services.ProjectService;
 import com.makarenko.tasktool.services.ProjectTaskService;
@@ -15,19 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectTaskServiceImpl implements ProjectTaskService {
 
-  private final BacklogRepository backlogRepository;
   private final ProjectTaskRepository projectTaskRepository;
-  private final ProjectRepository projectRepository;
   private final ProjectService projectService;
 
   @Autowired
-  public ProjectTaskServiceImpl(BacklogRepository backlogRepository,
-      ProjectTaskRepository projectTaskRepository,
-      ProjectRepository projectRepository,
+  public ProjectTaskServiceImpl(ProjectTaskRepository projectTaskRepository,
       ProjectService projectService) {
-    this.backlogRepository = backlogRepository;
     this.projectTaskRepository = projectTaskRepository;
-    this.projectRepository = projectRepository;
     this.projectService = projectService;
   }
 

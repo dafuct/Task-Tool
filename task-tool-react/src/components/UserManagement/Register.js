@@ -68,7 +68,9 @@ class Register extends Component {
                     onChange={this.onChange}
                   />
                   {errors.fullName && (
-                    <div className="invalid-feedback">{errors.fullName}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.fullName}
+                    </div>
                   )}
                 </div>
                 <div className="form-group">
@@ -83,7 +85,9 @@ class Register extends Component {
                     onChange={this.onChange}
                   />
                   {errors.username && (
-                    <div className="invalid-feedback">{errors.username}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.username}
+                    </div>
                   )}
                 </div>
                 <div className="form-group">
@@ -98,7 +102,9 @@ class Register extends Component {
                     onChange={this.onChange}
                   />
                   {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.password}
+                    </div>
                   )}
                 </div>
                 <div className="form-group">
@@ -113,7 +119,7 @@ class Register extends Component {
                     onChange={this.onChange}
                   />
                   {errors.confirmPassword && (
-                    <div className="invalid-feedback">
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
                       {errors.confirmPassword}
                     </div>
                   )}

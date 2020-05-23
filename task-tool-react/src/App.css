@@ -70,14 +70,23 @@ img {
   background-color: rgba(171, 182, 218, 0.493);
 }
 
-.projects {
-  position: relative;
-  background-size: cover;
-  background-position: center;
+.projects,
+.project,
+.add-PBI {
   height: 100vh;
   margin-top: -24px;
-  margin-bottom: -50px;
   background-color: slategray;
+}
+
+.tasks {
+  height: 100vh;
+  margin-top: -1.5rem;
+  padding-top: 1.5rem;
+  background-color: slategray;
+}
+
+.card.bord {
+  background-color: rgba(94, 92, 100, 0.26);
 }
 
 .landing-inner {

@@ -74,9 +74,9 @@ class UpdateProject extends Component {
     return (
       <div className="project">
         <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h5 className="display-4 text-center">Update Project form</h5>
+          <div className="row justify-content-center">
+            <div className="col-md-8 mt-4">
+              <h5 className="display-4 text-center mt-2 pb-2">Обновить цель</h5>
               <hr />
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
@@ -91,7 +91,9 @@ class UpdateProject extends Component {
                     onChange={this.onChange}
                   />
                   {errors.projectName && (
-                    <div className="invalid-feedback">{errors.projectName}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.projectName}
+                    </div>
                   )}
                 </div>
                 <div className="form-group">
@@ -116,10 +118,12 @@ class UpdateProject extends Component {
                     value={this.state.description}
                   />
                   {errors.description && (
-                    <div className="invalid-feedback">{errors.description}</div>
+                    <div className="p-1 mb-1 bg-danger rounded-sm text-white">
+                      {errors.description}
+                    </div>
                   )}
                 </div>
-                <h6>Start Date</h6>
+                <h6>Начальная дата</h6>
                 <div className="form-group">
                   <input
                     type="date"
@@ -129,7 +133,7 @@ class UpdateProject extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-                <h6>Estimated End Date</h6>
+                <h6>Предполагаемая дата окончания</h6>
                 <div className="form-group">
                   <input
                     type="date"
@@ -142,7 +146,8 @@ class UpdateProject extends Component {
 
                 <input
                   type="submit"
-                  className="btn btn-primary btn-block mt-4"
+                  className="btn btn-dark btn-block mt-4"
+                  value="Обновить"
                 />
               </form>
             </div>

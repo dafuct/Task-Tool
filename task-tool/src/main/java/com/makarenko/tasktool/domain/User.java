@@ -34,15 +34,15 @@ public class User implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Email(message = "Username needs to be an email")
-  @NotBlank(message = "username is required")
+  @Email(message = "Имя пользователя должно быть электронной почтой")
+  @NotBlank(message = "Имя пользователя обязательно для заполнения")
   @Column(unique = true)
   private String username;
 
-  @NotBlank(message = "Please enter your full name")
+  @NotBlank(message = "Пожалуйста введите свое имя")
   private String fullName;
 
-  @NotBlank(message = "Password field is required")
+  @NotBlank(message = "Поле пароля обязательно для заполнения")
   private String password;
 
   @Transient

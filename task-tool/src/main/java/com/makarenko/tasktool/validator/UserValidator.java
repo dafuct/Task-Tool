@@ -17,11 +17,11 @@ public class UserValidator implements Validator {
   public void validate(Object o, Errors errors) {
     User user = (User) o;
     if (user.getPassword().length() < 6) {
-      errors.rejectValue("password", "Length", "Password must be at least 6 characters");
+      errors.rejectValue("password", "Length", "Пароль должен содержать не менее 6 символов");
     }
 
     if (!user.getPassword().equals(user.getConfirmPassword())) {
-      errors.rejectValue("confirmPassword", "Match", "Password must match");
+      errors.rejectValue("confirmPassword", "Match", "Пароли должны совпадать");
     }
   }
 }

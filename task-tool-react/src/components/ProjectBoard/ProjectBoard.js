@@ -48,7 +48,7 @@ class ProjectBoard extends Component {
         } else {
           return (
             <div className="alert alert-info text-center" role="alert">
-              No Project Tasks on this board
+              Пока нет задач для этой цели
             </div>
           );
         }
@@ -60,13 +60,20 @@ class ProjectBoard extends Component {
     BoardContent = boardAlgorithm(errors, project_tasks);
 
     return (
-      <div className="container">
-        <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
-          <i className="fas fa-plus-circle"> Create Project Task</i>
-        </Link>
-        <br />
-        <hr />
-        {BoardContent}
+      <div className="tasks">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <Link to={`/addProjectTask/${id}`} className="btn btn-dark mb-3">
+                <i className="fas fa-plus-circle"></i>
+                <i> Создать задачу</i>
+              </Link>
+              <br />
+              <hr />
+              {BoardContent}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

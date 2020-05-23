@@ -96,19 +96,17 @@ class UpdateProjectTask extends Component {
     return (
       <div className="add-PBI">
         <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
+          <div className="row justify-content-center">
+            <div className="col-md-8 mt-4">
               <Link
                 to={`/projectBoard/${this.state.projectIdentifier}`}
-                className="btn btn-light"
+                className="btn btn-dark"
               >
-                Back to Project Board
+                Назад к списку задач
               </Link>
-              <h4 className="display-4 text-center">Update Project Task</h4>
-              <p className="lead text-center">
-                Project Name: {this.state.projectIdentifier} | Project Task ID:{" "}
-                {this.state.projectSequence}{" "}
-              </p>
+              <h4 className="display-4 text-center mt-2 pb-2">
+                Обновить задачу
+              </h4>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -134,7 +132,7 @@ class UpdateProjectTask extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-                <h6>Due Date</h6>
+                <h6>Срок сдачи</h6>
                 <div className="form-group">
                   <input
                     type="date"
@@ -152,9 +150,9 @@ class UpdateProjectTask extends Component {
                     onChange={this.onChange}
                   >
                     <option value={0}>Select Priority</option>
-                    <option value={1}>High</option>
-                    <option value={2}>Medium</option>
-                    <option value={3}>Low</option>
+                    <option value={1}>Высокий</option>
+                    <option value={2}>Средний</option>
+                    <option value={3}>Низкий</option>
                   </select>
                 </div>
 
@@ -165,16 +163,17 @@ class UpdateProjectTask extends Component {
                     value={this.state.status}
                     onChange={this.onChange}
                   >
-                    <option value="">Select Status</option>
-                    <option value="TO_DO">TO DO</option>
-                    <option value="IN_PROGRESS">IN PROGRESS</option>
-                    <option value="DONE">DONE</option>
+                    <option value="">Выбрать статус</option>
+                    <option value="TO_DO">Начать</option>
+                    <option value="IN_PROGRESS">Выполняется</option>
+                    <option value="DONE">Выполнена</option>
                   </select>
                 </div>
 
                 <input
                   type="submit"
-                  className="btn btn-primary btn-block mt-4"
+                  className="btn btn-dark btn-block mt-4"
+                  value="Обновить"
                 />
               </form>
             </div>

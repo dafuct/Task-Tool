@@ -30,15 +30,15 @@ public class Project {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank(message = "Project name is required")
+  @NotBlank(message = "Название цели должно быть заполнено")
   private String projectName;
 
-  @NotBlank(message ="Project Identifier is required")
-  @Size(min=4, max=5, message = "Please use 4 to 5 characters")
+  @NotBlank(message ="Поле идентификатора цели должно быть заполнено")
+  @Size(min=4, max=5, message = "Пожалуйста используйте от 4 - 5 символов")
   @Column(updatable = false, unique = true)
   private String projectIdentifier;
 
-  @NotBlank(message = "Project description is required")
+  @NotBlank(message = "Описание цели должно быть заполнено")
   private String description;
 
   @JsonFormat(pattern = "yyyy-mm-dd")

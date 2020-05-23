@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class ProjectTask extends Component {
-  onDeleteClick(backlog_id, pt_id) {
-    this.props.deleteProjectTask(backlog_id, pt_id);
+  onDeleteClick(backlog_id, pt_id, pt_summary) {
+    this.props.deleteProjectTask(backlog_id, pt_id, pt_summary);
   }
   render() {
     const { project_task } = this.props;
@@ -15,25 +15,25 @@ class ProjectTask extends Component {
 
     if (project_task.priority === 1) {
       priorityClass = "bg-danger text-light";
-      priorityString = "HIGH";
+      priorityString = "Высокий";
     }
 
     if (project_task.priority === 2) {
       priorityClass = "bg-warning text-light";
-      priorityString = "MEDIUM";
+      priorityString = "Средний";
     }
 
     if (project_task.priority === 3) {
       priorityClass = "bg-info text-light";
-      priorityString = "LOW";
+      priorityString = "Низкий";
     }
 
     return (
-      <div className="card mb-1 bg-light">
+      <div className="card mb-1 bord">
         <div className={`card-header text-primary ${priorityClass}`}>
-          ID: {project_task.projectSequence} -- Priority: {priorityString}
+          Приоритет: {priorityString}
         </div>
-        <div className="card-body bg-light">
+        <div className="card-body bg-secondary">
           <h5 className="card-title">{project_task.summary}</h5>
           <p className="card-text text-truncate ">
             {project_task.acceptanceCriteria}
@@ -42,7 +42,7 @@ class ProjectTask extends Component {
             to={`/updateProjectTask/${project_task.projectIdentifier}/${project_task.projectSequence}`}
             className="btn btn-primary"
           >
-            View / Update
+            Обновить
           </Link>
 
           <button
@@ -50,10 +50,11 @@ class ProjectTask extends Component {
             onClick={this.onDeleteClick.bind(
               this,
               project_task.projectIdentifier,
-              project_task.projectSequence
+              project_task.projectSequence,
+              project_task.summary
             )}
           >
-            Delete
+            Удалить
           </button>
         </div>
       </div>

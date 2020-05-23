@@ -31,7 +31,7 @@ public class ProjectTask {
   private Long id;
   @Column(updatable = false, unique = true)
   private String projectSequence;
-  @NotBlank(message = "Please include a project summary")
+  @NotBlank(message = "Пожалуйста введите название задачи")
   private String summary;
   private String acceptanceCriteria;
   private String status;
